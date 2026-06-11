@@ -194,3 +194,9 @@ Each entry in `result.vouchers`:
   qrPayload: "rsg:v_...",
 }
 ```
+
+## License
+
+This project is licensed under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE).
+
+The vendored QR encoder in `src/print/vendor/qrcodegen.ts` is MIT-licensed (Project Nayuki) and remains under those terms.
