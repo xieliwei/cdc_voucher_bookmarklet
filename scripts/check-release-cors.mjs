@@ -4,7 +4,7 @@
  *
  * Usage:
  *   node scripts/check-release-cors.mjs v0.1.0
- *   node scripts/check-release-cors.mjs https://github.com/owner/repo/releases/download/vX.Y.Z/cdc-voucher-collector.js
+ *   node scripts/check-release-cors.mjs https://owner.github.io/repo/releases/vX.Y.Z/cdc-voucher-collector.js
  *
  * Exit 0 if Access-Control-Allow-Origin is present on the final response.
  * Exit 1 if missing or the asset is unreachable (404, network error).
@@ -22,7 +22,8 @@ function resolveScriptUrl(input) {
     return input;
   }
   const tag = input.startsWith("v") ? input : `v${input}`;
-  return `https://github.com/${DEFAULT_REPO}/releases/download/${tag}/${ASSET}`;
+  const [owner, name] = DEFAULT_REPO.split("/");
+  return `https://${owner}.github.io/${name}/releases/${tag}/${ASSET}`;
 }
 
 /**

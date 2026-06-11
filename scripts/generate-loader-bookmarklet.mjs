@@ -46,6 +46,17 @@ function sha384Integrity(bytes) {
 }
 
 /**
+ * GitHub Pages URL for the version-pinned bundle (CORS-enabled; required for SRI).
+ *
+ * @param {string} repo
+ * @param {string} tag
+ */
+export function pagesAssetUrl(repo, tag) {
+  const [owner, name] = repo.split("/");
+  return `https://${owner}.github.io/${name}/releases/${tag}/${ASSET_NAME}`;
+}
+
+/**
  * @param {string} repo
  * @param {string} tag
  */
@@ -172,7 +183,7 @@ if (isMain) {
 
   const bytes = fs.readFileSync(args.file);
   const integrity = sha384Integrity(bytes);
-  const scriptUrl = args.scriptUrl ?? releaseAssetUrl(args.repo, args.tag);
+  const scriptUrl = args.scriptUrl ?? pagesAssetUrl(args.repo, args.tag);
   const bookmarklet = buildLoaderBookmarklet(scriptUrl, integrity);
 
   fs.mkdirSync(args.outDir, { recursive: true });

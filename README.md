@@ -43,7 +43,8 @@ If the release file is replaced or tampered with after you install, the bookmark
 
 For release `vX.Y.Z`, confirm:
 
-- Script URL: `https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/download/vX.Y.Z/cdc-voucher-collector.js`
+- Script URL: `https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/vX.Y.Z/cdc-voucher-collector.js` (GitHub Pages; required for SRI/CORS)
+- GitHub Release attachment is for manual download only; the bookmark loads from Pages.
 - SHA-384 in release notes matches the hash embedded in your bookmark
 - Source at tag `vX.Y.Z` matches what you expect
 

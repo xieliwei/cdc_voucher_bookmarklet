@@ -1,5 +1,14 @@
 [
   {
+    "tag": "v0.1.1",
+    "released": "2026-06-11",
+    "scriptUrl": "https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/v0.1.1/cdc-voucher-collector.js",
+    "integrity": "sha384-ie4fszki6WwQr32tfZvVeHNJyhMYWv2f9uDF5A3HAAdnhRIi/TzmrKSSMk6YNdq4",
+    "bookmarklet": "javascript:(function(u,h){if(location.hostname!=='voucher.redeem.gov.sg')return;var s=document.createElement('script');s.src=u;s.integrity=h;s.crossOrigin='anonymous';s.onload=function(){CdcVoucherCollector.run({print:true}).catch(function(e){alert(e.message||e)})};document.head.appendChild(s)})(\"https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/v0.1.1/cdc-voucher-collector.js\",\"sha384-ie4fszki6WwQr32tfZvVeHNJyhMYWv2f9uDF5A3HAAdnhRIi/TzmrKSSMk6YNdq4\")",
+    "installPage": "https://xieliwei.github.io/cdc_voucher_bookmarklet/install.html#v0.1.1",
+    "releaseUrl": "https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/tag/v0.1.1"
+  },
+  {
     "tag": "v0.1.0",
     "released": "2026-06-11",
     "scriptUrl": "https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/download/v0.1.0/cdc-voucher-collector.js",

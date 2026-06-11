@@ -1,6 +1,6 @@
 {
   "name": "cdc-voucher-bookmarklet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Collect RedeemSG CDC voucher QR payloads and open an A4 print layout",
   "type": "module",
   "private": false,

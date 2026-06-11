@@ -43,12 +43,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cp docs/versions.json /tmp/versions.json
           cp docs/install.html /tmp/install.html
+          cp -r docs/releases /tmp/releases
           git fetch origin main
           git checkout main
           git pull --ff-only origin main
           cp /tmp/versions.json docs/versions.json
           cp /tmp/install.html docs/install.html
-          git add docs/versions.json docs/install.html
+          cp -r /tmp/releases/* docs/releases/
+          git add docs/versions.json docs/install.html docs/releases/
           git diff --staged --quiet || git commit -m "docs: add install page entry for ${{ github.ref_name }}"
           git push origin main
 

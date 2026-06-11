@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildLoaderBookmarklet } from "./generate-loader-bookmarklet.mjs";
+import {
+  buildLoaderBookmarklet,
+  pagesAssetUrl,
+} from "./generate-loader-bookmarklet.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -16,7 +19,7 @@ const INSTALL_PATH = path.join(ROOT, "docs", "install.html");
  * @param {string} bookmarklet
  */
 function versionEntry(repo, tag, integrity, bookmarklet) {
-  const scriptUrl = `https://github.com/${repo}/releases/download/${tag}/cdc-voucher-collector.js`;
+  const scriptUrl = pagesAssetUrl(repo, tag);
   return {
     tag,
     released: new Date().toISOString().slice(0, 10),
@@ -120,8 +123,19 @@ function semverDesc(a, b) {
  * @param {string} tag
  * @param {string} integrity
  */
+/**
+ * @param {string} tag
+ */
+function publishPagesBundle(tag) {
+  const src = path.join(ROOT, "dist", "cdc-voucher-collector.js");
+  const destDir = path.join(ROOT, "docs", "releases", tag);
+  fs.mkdirSync(destDir, { recursive: true });
+  fs.copyFileSync(src, path.join(destDir, "cdc-voucher-collector.js"));
+}
+
 export function upsertVersion(tag, integrity) {
-  const scriptUrl = `https://github.com/${REPO}/releases/download/${tag}/cdc-voucher-collector.js`;
+  publishPagesBundle(tag);
+  const scriptUrl = pagesAssetUrl(REPO, tag);
   const bookmarklet = buildLoaderBookmarklet(scriptUrl, integrity);
 
   /** @type {Array<{tag: string}>} */
