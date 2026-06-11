@@ -329,7 +329,7 @@ function renderVoucherCell(voucher, qrDataUrl, expiryText) {
   return `
     <div class="voucher-left">
       <div class="voucher-amount-wrap">
-        <div class="voucher-amount" style="color:${amountColor}">$${voucher.amount}</div>
+        <div class="voucher-amount" style="color:${amountColor}">$${formatAmount(voucher.amount)}</div>
       </div>
       ${imgTag}
     </div>
@@ -382,7 +382,7 @@ function renderSheet(section, pageVouchers, qrByPayload, meta) {
   return `
     <section class="voucher-sheet" data-type="${escapeHtml(section.type)}" data-amount="${section.amount}">
       <header class="sheet-header">
-        <h1 class="sheet-title">${escapeHtml(section.typeLabel)} - $${section.amount}</h1>
+        <h1 class="sheet-title">${escapeHtml(section.typeLabel)} - $${formatAmount(section.amount)}</h1>
         ${sheetExpiry}
       </header>
       <div class="sheet-grid">${slots.join("")}</div>
@@ -399,6 +399,17 @@ function escapeHtml(text) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+/**
+ * @param {unknown} amount
+ */
+function formatAmount(amount) {
+  const n = Number(amount);
+  if (Number.isFinite(n) && n >= 0) {
+    return String(n);
+  }
+  return escapeHtml(amount ?? "");
 }
 
 /**

@@ -38,8 +38,8 @@ function renderInstallHtml(versions) {
   const rows = versions
     .map(
       (v) => `    <section class="version" id="${escapeAttr(v.tag)}">
-      <h2>${v.tag} <span class="date">${v.released}</span></h2>
-      <p><a class="bookmark" href="${escapeAttr(v.bookmarklet)}">CDC Voucher Print ${v.tag}</a></p>
+      <h2>${escapeHtml(v.tag)} <span class="date">${escapeHtml(v.released)}</span></h2>
+      <p><a class="bookmark" href="${escapeAttr(v.bookmarklet)}">CDC Voucher Print ${escapeHtml(v.tag)}</a></p>
       <details>
         <summary>Verify / manual install</summary>
         <ul>
@@ -133,6 +133,11 @@ function publishPagesBundle(tag) {
   fs.copyFileSync(src, path.join(destDir, "cdc-voucher-collector.js"));
 }
 
+export function writeInstallHtmlFromVersions() {
+  const versions = JSON.parse(fs.readFileSync(VERSIONS_PATH, "utf8"));
+  fs.writeFileSync(INSTALL_PATH, renderInstallHtml(versions), "utf8");
+}
+
 export function upsertVersion(tag, integrity) {
   publishPagesBundle(tag);
   const scriptUrl = pagesAssetUrl(REPO, tag);
@@ -150,7 +155,7 @@ export function upsertVersion(tag, integrity) {
 
   fs.mkdirSync(path.dirname(VERSIONS_PATH), { recursive: true });
   fs.writeFileSync(VERSIONS_PATH, `${JSON.stringify(filtered, null, 2)}\n`, "utf8");
-  fs.writeFileSync(INSTALL_PATH, renderInstallHtml(filtered), "utf8");
+  writeInstallHtmlFromVersions();
   console.log(`updated ${VERSIONS_PATH} and ${INSTALL_PATH}`);
 }
 

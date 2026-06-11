@@ -53,6 +53,7 @@ const options = {
   target: ["chrome109", "firefox115", "safari16", "edge109"],
   legalComments: "none",
   treeShaking: true,
+  drop: watch ? [] : ["console"],
 };
 
 if (watch) {

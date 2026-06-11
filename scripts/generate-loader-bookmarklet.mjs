@@ -57,28 +57,30 @@ export function pagesAssetUrl(repo, tag) {
 }
 
 /**
- * @param {string} repo
- * @param {string} tag
- */
-function releaseAssetUrl(repo, tag) {
-  return `https://github.com/${repo}/releases/download/${tag}/${ASSET_NAME}`;
-}
-
-/**
  * @param {string} scriptUrl
  * @param {string} integrity
  */
 export function buildLoaderBookmarklet(scriptUrl, integrity) {
   const body = [
-    "if(location.hostname!=='voucher.redeem.gov.sg')return",
+    "if(location.hostname!=='voucher.redeem.gov.sg'){alert('Use this bookmark on voucher.redeem.gov.sg only.');return}",
     "var s=document.createElement('script')",
     "s.src=u",
     "s.integrity=h",
     "s.crossOrigin='anonymous'",
+    "s.onerror=function(){alert('Failed to load CDC Voucher Print (network, CORS, or integrity check).')}",
     "s.onload=function(){CdcVoucherCollector.run({print:true}).catch(function(e){alert(e.message||e)})}",
     "document.head.appendChild(s)",
   ].join(";");
   return `javascript:(function(u,h){${body}})(${JSON.stringify(scriptUrl)},${JSON.stringify(integrity)})`;
+}
+
+/** @param {string} s */
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 /**
@@ -107,7 +109,7 @@ function buildInstallHtml({ repo, tag, bookmarklet, integrity, scriptUrl }) {
   </style>
 </head>
 <body>
-  <h1>CDC Voucher Print ${tag}</h1>
+  <h1>CDC Voucher Print ${escapeHtml(tag)}</h1>
   <div class="warn">
     <strong>Warning:</strong> Bookmarklets are inherently dangerous. They run with full access to the page you are on,
     including your voucher wallet. Do not install without reading the
@@ -116,7 +118,7 @@ function buildInstallHtml({ repo, tag, bookmarklet, integrity, scriptUrl }) {
   </div>
   <h2>Drag to bookmarks bar</h2>
   <p>Drag this link to your browser bookmarks bar, then use it on <code>voucher.redeem.gov.sg</code>:</p>
-  <p><a class="bookmark" href="${bookmarklet.replace(/"/g, "&quot;")}">CDC Voucher Print ${tag}</a></p>
+  <p><a class="bookmark" href="${bookmarklet.replace(/"/g, "&quot;")}">CDC Voucher Print ${escapeHtml(tag)}</a></p>
   <h2>Manual install</h2>
   <p>Create a bookmark and paste this as the Location URL:</p>
   <pre>${bookmarklet.replace(/</g, "&lt;")}</pre>

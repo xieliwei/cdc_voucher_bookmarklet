@@ -107,7 +107,7 @@ export async function collectVouchers(options = {}) {
       id: v.id,
       type: v.type,
       typeLabel: labelForVoucherType(v.type, categoryPrefix),
-      amount: v.voucher_value,
+      amount: Number(v.voucher_value) || 0,
       state: v.state,
       qrPayload,
     });

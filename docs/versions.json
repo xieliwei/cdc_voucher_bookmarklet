@@ -1,5 +1,14 @@
 [
   {
+    "tag": "v0.1.2",
+    "released": "2026-06-11",
+    "scriptUrl": "https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/v0.1.2/cdc-voucher-collector.js",
+    "integrity": "sha384-MJnKbOvLcM/LPh6J7KcMTJ8CsvPjGtnl4UOfrQee/WWqqE6pzR9tEKbyAJe2QCkY",
+    "bookmarklet": "javascript:(function(u,h){if(location.hostname!=='voucher.redeem.gov.sg'){alert('Use this bookmark on voucher.redeem.gov.sg only.');return};var s=document.createElement('script');s.src=u;s.integrity=h;s.crossOrigin='anonymous';s.onerror=function(){alert('Failed to load CDC Voucher Print (network, CORS, or integrity check).')};s.onload=function(){CdcVoucherCollector.run({print:true}).catch(function(e){alert(e.message||e)})};document.head.appendChild(s)})(\"https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/v0.1.2/cdc-voucher-collector.js\",\"sha384-MJnKbOvLcM/LPh6J7KcMTJ8CsvPjGtnl4UOfrQee/WWqqE6pzR9tEKbyAJe2QCkY\")",
+    "installPage": "https://xieliwei.github.io/cdc_voucher_bookmarklet/install.html#v0.1.2",
+    "releaseUrl": "https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/tag/v0.1.2"
+  },
+  {
     "tag": "v0.1.1",
     "released": "2026-06-11",
     "scriptUrl": "https://xieliwei.github.io/cdc_voucher_bookmarklet/releases/v0.1.1/cdc-voucher-collector.js",
