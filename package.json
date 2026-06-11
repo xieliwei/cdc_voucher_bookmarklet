@@ -1,0 +1,34 @@
+{
+  "name": "cdc-voucher-bookmarklet",
+  "version": "0.1.0",
+  "description": "Collect RedeemSG CDC voucher QR payloads and open an A4 print layout",
+  "type": "module",
+  "private": false,
+  "homepage": "https://github.com/xieliwei/cdc_voucher_bookmarklet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xieliwei/cdc_voucher_bookmarklet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xieliwei/cdc_voucher_bookmarklet/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "build:watch": "node build.mjs --watch",
+    "generate:loader": "node scripts/generate-loader-bookmarklet.mjs",
+    "release:build": "node scripts/build-release.mjs",
+    "release:check-cors": "node scripts/check-release-cors.mjs",
+    "release:serve": "node scripts/serve-dist.mjs",
+    "images": "python scripts/optimize_images.py",
+    "test": "node tests/qr-payload.test.mjs && node tests/print-format-expiry.test.mjs && node scripts/bundle-test.mjs && node tests/.out/qr-encoder-parity.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "jsqr": "^1.4.0",
+    "pngjs": "^7.0.0",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+tests/.out/
+*.local.js
+*.local.json
+.env
+.DS_Store
+
+# Build output — keep the distributable bundle in git
+dist/*
+!dist/cdc-voucher-collector.js

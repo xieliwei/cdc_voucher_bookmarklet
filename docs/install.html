@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDC Voucher Print - install</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 44rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    .warn { background: #fff3cd; border: 1px solid #ffe69c; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; }
+    a.bookmark { display: inline-block; font-size: 1.05rem; padding: 0.55rem 0.9rem; background: #111; color: #fff; text-decoration: none; border-radius: 6px; }
+    .version { border-top: 1px solid #ddd; padding-top: 1.25rem; margin-top: 1.25rem; }
+    .date { font-size: 0.9rem; font-weight: normal; color: #666; }
+    code, pre { font-size: 0.82rem; word-break: break-all; }
+    pre { background: #f4f4f4; padding: 0.75rem; overflow-x: auto; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>CDC Voucher Print</h1>
+  <div class="warn">
+    <strong>Warning:</strong> Bookmarklets are inherently dangerous. They run with full access to the page you are on,
+    including your voucher wallet. Do not install without reading the
+    <a href="https://github.com/xieliwei/cdc_voucher_bookmarklet/blob/main/DISCLAIMER.md">disclaimer</a>
+    and reviewing the source for the version you choose.
+    <strong>Vibecoded:</strong> this repo was built with substantial AI assistance; review the code yourself before use.
+  </div>
+  <p>Pick a version below. Drag the link to your bookmarks bar. Each bookmark is pinned to that release and its SHA-384 hash.</p>
+  <p><strong>Do not</strong> use a "latest" or main-branch URL. Install a specific version only after you have reviewed it.</p>
+    <section class="version" id="v0.1.0">
+      <h2>v0.1.0 <span class="date">2026-06-11</span></h2>
+      <p><a class="bookmark" href="javascript:(function(u,h){if(location.hostname!==&#39;voucher.redeem.gov.sg&#39;)return;var s=document.createElement(&#39;script&#39;);s.src=u;s.integrity=h;s.crossOrigin=&#39;anonymous&#39;;s.onload=function(){CdcVoucherCollector.run({print:true}).catch(function(e){alert(e.message||e)})};document.head.appendChild(s)})(&quot;https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/download/v0.1.0/cdc-voucher-collector.js&quot;,&quot;sha384-ie4fszki6WwQr32tfZvVeHNJyhMYWv2f9uDF5A3HAAdnhRIi/TzmrKSSMk6YNdq4&quot;)">CDC Voucher Print v0.1.0</a></p>
+      <details>
+        <summary>Verify / manual install</summary>
+        <ul>
+          <li><a href="https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/tag/v0.1.0">Release notes</a></li>
+          <li>Script: <code>https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/download/v0.1.0/cdc-voucher-collector.js</code></li>
+          <li>SHA-384: <code>sha384-ie4fszki6WwQr32tfZvVeHNJyhMYWv2f9uDF5A3HAAdnhRIi/TzmrKSSMk6YNdq4</code></li>
+        </ul>
+        <pre>javascript:(function(u,h){if(location.hostname!=='voucher.redeem.gov.sg')return;var s=document.createElement('script');s.src=u;s.integrity=h;s.crossOrigin='anonymous';s.onload=function(){CdcVoucherCollector.run({print:true}).catch(function(e){alert(e.message||e)})};document.head.appendChild(s)})(&quot;https://github.com/xieliwei/cdc_voucher_bookmarklet/releases/download/v0.1.0/cdc-voucher-collector.js&quot;,&quot;sha384-ie4fszki6WwQr32tfZvVeHNJyhMYWv2f9uDF5A3HAAdnhRIi/TzmrKSSMk6YNdq4&quot;)</pre>
+      </details>
+    </section>
+</body>
+</html>

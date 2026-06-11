@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Test and build
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Generate loader bookmarklet and release notes
+        run: node scripts/generate-loader-bookmarklet.mjs --tag "${{ github.ref_name }}" --repo "${{ github.repository }}"
+
+      - name: Read integrity hash
+        id: hash
+        run: echo "integrity=$(tr -d '\n' < dist/cdc-voucher-collector.js.sha384)" >> "$GITHUB_OUTPUT"
+
+      - name: Update install docs
+        run: node scripts/update-install-docs.mjs "${{ github.ref_name }}" "${{ steps.hash.outputs.integrity }}"
+
+      - name: Commit install docs to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp docs/versions.json /tmp/versions.json
+          cp docs/install.html /tmp/install.html
+          git fetch origin main
+          git checkout main
+          git pull --ff-only origin main
+          cp /tmp/versions.json docs/versions.json
+          cp /tmp/install.html docs/install.html
+          git add docs/versions.json docs/install.html
+          git diff --staged --quiet || git commit -m "docs: add install page entry for ${{ github.ref_name }}"
+          git push origin main
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: dist/release-notes-${{ github.ref_name }}.md
+          files: |
+            dist/cdc-voucher-collector.js
+            dist/cdc-voucher-collector.js.sha384
+            dist/loader-bookmarklet-${{ github.ref_name }}.txt
+            dist/install-${{ github.ref_name }}.html
