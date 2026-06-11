@@ -27,7 +27,7 @@
     "test": "node tests/qr-payload.test.mjs && node tests/print-format-expiry.test.mjs && node scripts/bundle-test.mjs && node tests/.out/qr-encoder-parity.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.0",
     "jsqr": "^1.4.0",
     "pngjs": "^7.0.0",
     "qrcode": "^1.5.4"
